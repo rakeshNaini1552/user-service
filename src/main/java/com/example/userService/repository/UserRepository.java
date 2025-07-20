@@ -1,7 +1,7 @@
-package com.example.demo.repository;
+package com.example.userService.repository;
 
 
-import com.example.demo.model.User;
+import com.example.userService.model.User;
 import jakarta.validation.constraints.Email;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

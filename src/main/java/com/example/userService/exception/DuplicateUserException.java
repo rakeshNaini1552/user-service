@@ -1,4 +1,4 @@
-package com.example.demo.exception;
+package com.example.userService.exception;
 
 public class DuplicateUserException extends RuntimeException{
     public DuplicateUserException(String message){

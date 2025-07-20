@@ -1,9 +1,9 @@
-package com.example.demo.service;
+package com.example.userService.service;
 
-import com.example.demo.exception.DuplicateUserException;
-import com.example.demo.exception.UserNotFoundException;
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.example.userService.exception.DuplicateUserException;
+import com.example.userService.exception.UserNotFoundException;
+import com.example.userService.model.User;
+import com.example.userService.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(rollbackOn = Exception.class)

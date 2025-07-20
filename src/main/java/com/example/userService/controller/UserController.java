@@ -1,20 +1,19 @@
-package com.example.demo.controller;
+package com.example.userService.controller;
 
-import com.example.demo.model.User;
-import com.example.demo.service.UserService;
+import com.example.userService.dto.UserDto;
+import com.example.userService.model.User;
+import com.example.userService.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -24,7 +23,12 @@ public class UserController {
     public ResponseEntity<?> getUserById(@PathVariable Integer id) {
             System.out.println(id);
             User user = userService.findById(id);
-            return ResponseEntity.ok(user);  // 200 OK with user
+            return ResponseEntity.ok( new UserDto(
+                    user.getId(),
+                    user.getEmail(),
+                    user.getFirstName(),
+                    user.getLastName()
+            ));
     }
 
     @GetMapping("/allUsers")

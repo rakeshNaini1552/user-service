@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package com.example.userService.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,17 +17,19 @@ public class JwtUtil {
             "this_is_a_super_long_secret_key_with_32+_chars!".getBytes()
     );
 
-    private final long EXPIRATION_TIME = 1000 * 60 * 3; // 1 hour in ms
+    private final long EXPIRATION_TIME = 1000 * 60 * 15; // 1 hour in ms
 
 
-    public String generateToken(String username) {
+    public String generateToken(Integer userId, String username) {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(username)             // still keep username as subject
+                .claim("userId", userId)          // ✅ custom claim for userId
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) // 1 day
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
                 .compact();
     }
+
 
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
